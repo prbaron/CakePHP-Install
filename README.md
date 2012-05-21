@@ -2,7 +2,6 @@
 The Install plugin allows you to install your tables and entries with a GUI.
 
 ## Installation
-<<<<<<< HEAD
 1. First, Copy the **Install** folder in _app/plugin_.
 2. In your _app/Config/bootstrap.php_ file, you have to load the plugin by adding this line : 
 
@@ -37,16 +36,10 @@ is CategoryData.php).
 
 each entry has to be in the $records array. You add the fields as keys and the values are your entries. Don't forget to 
 fill all the fields
-=======
-First, C
->>>>>>> commit
 
 ## Credits
 Install-CakePHP-Plugin is a 2.x version of the Croogo Install Plugin.
 Pierre Baron.
 
-<<<<<<< HEAD
 Pierre Baron is a software and home automation Engineer specialized in web and mobile development.
-=======
-Pierre Baron is a software and home automation Engineer specialized in web and mobile development.
->>>>>>> commit
+
