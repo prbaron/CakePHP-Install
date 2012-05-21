@@ -1,0 +1,18 @@
+body {
+	padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+}
+
+/**
+* Div help-block située juste après une div control-group
+* Element utilisé dans les formulaires
+*/
+.control-group + .help-block {
+	margin-top: -16px !important;
+}		
+/**
+* Centre les images
+*/
+.img-center {
+	display: block;
+	margin: 0 auto 60px auto;
+}

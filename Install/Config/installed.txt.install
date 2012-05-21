@@ -1,0 +1,11 @@
+YEAH !!! IT ROCKS BABY!!! 
+
+If this file is in the app/Config repertory and is named installed.txt, that means that the database has been successfully created and configured.
+You can now work on your website!
+
+
+
+The Install Plugin is a 2.x CakePHP version of the Croogo Install Plugin.
+
+Pierre Baron, 2012.
+<prbaron22@gmail.com>
