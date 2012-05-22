@@ -1,5 +1,5 @@
 ## Install-CakePHP-Plugin
-The Install plugin allows you to install your tables and entries with a GUI.
+The Install plugin allows you to install your tables and entries with a GUI such as the Wordpress installation process.
 
 ## Installation
 1. Copy the **Install** folder to _app/Plugin/_.
