@@ -26,7 +26,8 @@ fill all the fields
 
 ## Credits
 Install-CakePHP-Plugin is a 2.x version of the Croogo Install Plugin.
-Pierre Baron.
+
+Pierre Baron. <prbaron22@gmail.com>
 
 Pierre Baron is a software and home automation Engineer specialized in web and mobile development.
 
