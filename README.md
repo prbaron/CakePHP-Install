@@ -2,24 +2,11 @@
 The Install plugin allows you to install your tables and entries with a GUI.
 
 ## Installation
-1. First, Copy the **Install** folder in _app/plugin_.
-2. In your _app/Config/bootstrap.php_ file, you have to load the plugin by adding this line : 
-
-```php
-    <?php CakePlugin::load('Install'); ?>
-```
-3. In your _app/Config/routes.php_, add the following lines at the beginning of the file : 
-
-```php
-  <?php
-    if (!file_exists(APP. 'Config' .DS. 'installed.txt')) {
-        CakePlugin::load('Install');
-        Router::connect('/', array('plugin' => 'install', 'controller' => 'install'));
-    }
-  ?>  
-```
-
-4. Copy the _Schema.php_ file to _app/Config/Schema_.
+1. Copy the **Install** folder to _app/Plugin/_.
+2. Copy the **bootstrap.php** and **routes.php** files to _app/Config/_.
+3. Copy the **Schema.php** file to _app/Config/Schema/_.
+4. Rename the **database.php.default** file (location : _app/Config/_) to **database.php**, don't need to open it, we will create the database 
+configuration with the plugin
 5. You can now install your database, tables and default entries
 
 ## Configuration
