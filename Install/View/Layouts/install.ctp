@@ -26,6 +26,18 @@
 		<div class="navbar-inner">
 			<div class="container">
 				<a href="#" class="brand">INSTALLATION</a>
+				
+				<div class="nav-collapse">
+					<ul class="nav">
+						<?php $active = $this->params['action']; ?>
+
+						<li class="<?php echo $active=="index" ? 'active':''; ?>"><a href="">Step 1</a></li>
+						<li class="<?php echo $active=="database" ? 'active':''; ?>"><a href="">Step 2</a></li>
+						<li class="<?php echo $active=="connection" ? 'active':''; ?>"><a href="">Step 3</a></li>
+						<li class="<?php echo $active=="data" ? 'active':''; ?>"><a href="">Step 4</a></li>
+						<li class="<?php echo $active=="finish" ? 'active':''; ?>"><a href="">Step 5</a></li>
+					</ul>
+				</div><!--/.nav-collapse -->
 			</div>
 		</div>
 	</div>

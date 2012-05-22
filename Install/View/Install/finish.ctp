@@ -20,7 +20,6 @@
 				<br/>
 				<strong><?php echo __("Password"); ?> :</strong> admin		
 			</p>
-			<br/><br/>
 		</div> <!-- .well -->
 		
 		<?php echo $this->Html->link(__("Go to the admin panel"), Router::url('/admin', true), array('class' => 'btn btn-primary')); ?>

@@ -1,9 +1,9 @@
 <div class="hero-unit">
  	<h1><?php echo __("Step 2"); ?></h1>
  	<p><?php echo __("Database creation")?></p>
- 	<br/><strong><?php echo __("Progression"); ?> - &nbsp;&nbsp;&nbsp;&nbsp;33%</strong>
+ 	<br/><strong><?php echo __("Progression"); ?> - &nbsp;&nbsp;&nbsp;&nbsp;25%</strong>
  	<div class="progress progress-striped progress-info">
-	 	<div class="bar " style="width: 33%"></div>
+	 	<div class="bar " style="width: 25%"></div>
 	</div> <!-- .progress -->
 </div> <!-- .hero-unit -->
 
@@ -31,7 +31,7 @@
 <div class="row">
 	<div class="span12">
 		<h2><?php echo __("Database connection test"); ?></h2>
-		<?php echo $this->Html->link(__("Step 3 - Connection test"), array(
+		<?php echo $this->Html->link(__("Step 3 - Database connection test"), array(
 							'plugin'		=> 'install',
 							'controller'	=> 'install',
 							'action'		=> 'connection'), array('class' => 'btn btn-primary')); ?>
