@@ -1,8 +1,17 @@
 <?php
+
+/**
+ * Entries for the model Post
+ */
 class PostData {
-	
+	/**
+	 * name of the table
+	 */
 	public $table = 'posts';
 	
+	/**
+	 * the entries
+	 */
 	public $records = array(
 		array(
 			'id' => '1',

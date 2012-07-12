@@ -1,6 +1,5 @@
 <?php 
-define('CONFIG', APP. 'Config' .DS);
-define('PLUGIN_CONFIG', APP. 'Plugin' .DS. 'Install' .DS. 'Config' .DS);
+
 
 class InstallController extends InstallAppController {
 	/**
@@ -31,7 +30,7 @@ class InstallController extends InstallAppController {
 	* Check wheter the installation file already exists
 	*/
 	protected function _check(){
-		if(file_exists(CONFIG. 'installed.txt')) {
+		if(Configure::read('Database.installed')) {
 			$this->Session->setFlash(__("Website already configured"));
 			$this->redirect('/');	
 		}
@@ -65,7 +64,10 @@ class InstallController extends InstallAppController {
 	public function connection() {
 		$this->_check();
 		$d['title_for_layout'] = __("Step 3 - Database connection");
-		
+		if (!file_exists(CONFIG.'database.php')) {
+			rename(CONFIG.'database.php.default', CONFIG.'database.php');
+		}
+	
 		if($this->request->is('post')) {
 			// loads ConnectionManager class
 			App::uses('ConnectionManager', 'Model');
@@ -82,7 +84,8 @@ class InstallController extends InstallAppController {
 					$config[$k] = $v;
 				}
 			}
-			
+
+
 			try {
 				/**
 				* Try to connect the database with the new configuration
@@ -140,6 +143,8 @@ class InstallController extends InstallAppController {
 			if(!$db->isConnected()) {
 				$this->Session->setFlash(__("Cannot connect to the database"), "Install.alert");
 			} else {
+				copy(PLUGIN_CONFIG.'Schema/Schema.php.install', CONFIG.'Schema/Schema.php');
+
 				// fetches all information of the tables of the Schema.php file (app/Config/Schema/Schema.php)
 				$schema = new CakeSchema(array('name' => 'app'));
 				$schema = $schema->load();
@@ -209,38 +214,24 @@ class InstallController extends InstallAppController {
 	public function finish() {
 		$this->_check();
 		$d['title_for_layout'] = __("Step 4 - Installation complete");
-
-		/**
-		* Changes the encryption keys to be unique for each application 
-		*/
-		App::uses('File', 'Utility');
-		$file = new File(CONFIG. 'core.php');
-		if (!class_exists('Security')) {
-			require CAKE . 'Utility/Security.php';
-		}
-		$salt = Security::generateAuthKey();
-		$seed = mt_rand() . mt_rand();
-		$contents = $file->read();
-		$contents = preg_replace('/(?<=Configure::write\(\'Security.salt\', \')([^\' ]+)(?=\'\))/', $salt, $contents);
-		$contents = preg_replace('/(?<=Configure::write\(\'Security.cipherSeed\', \')(\d+)(?=\'\))/', $seed, $contents);
 		
-		/**
-		* Recreates the passwords for each user with the news encryption keys
-		*/
-		if($file->write($contents)) {
+		$salt = $this->Install->updateSecurityKeys();
+		if($salt) {		
 			$users = $this->Install->query('SELECT * from users');
+
 			foreach($users as $k => $v) {
 				$v['users']['password'] = Security::hash($v['users']['username'], null, $salt);
 				$this->Install->save($v);
 			}
 
-			// copies the installed.txt file to app/config
-			copy(PLUGIN_CONFIG.'installed.txt.install', CONFIG.'installed.txt');
-
 		} else { return false; }
+		
+		if(!$this->Install->writeInstallationVariable()){
+			$this->Session->setFlash("Erreur, impossible de modifier la variable Database.installed dans Core.php", 'notif');
+		}
+
 
 		$this->set($d);
 	}
 	
 }
-?>
