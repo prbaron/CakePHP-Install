@@ -25,17 +25,11 @@
 	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
-				<a href="#" class="brand">INSTALLATION</a>
+				<a href="#" class="brand">CakePHP-Install</a>
 				
-				<div class="nav-collapse">
+				<div class="nav-collapse pull-right">
 					<ul class="nav">
-						<?php $active = $this->params['action']; ?>
-
-						<li class="<?php echo $active=="index" ? 'active':''; ?>"><a href="">Step 1</a></li>
-						<li class="<?php echo $active=="database" ? 'active':''; ?>"><a href="">Step 2</a></li>
-						<li class="<?php echo $active=="connection" ? 'active':''; ?>"><a href="">Step 3</a></li>
-						<li class="<?php echo $active=="data" ? 'active':''; ?>"><a href="">Step 4</a></li>
-						<li class="<?php echo $active=="finish" ? 'active':''; ?>"><a href="">Step 5</a></li>
+						<li><a href="http://www.pierrebaron.fr">Plugin by Pierre Baron</a></li>
 					</ul>
 				</div><!--/.nav-collapse -->
 			</div>

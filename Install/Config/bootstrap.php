@@ -7,8 +7,8 @@
 
 
 /**
- * Database installation variable$
+ * Database installation variable
  * if set to TRUE, the database is installed
  * if set to FALSE, the databse is not installed
  */
-	Configure::write('Database.installed', false);
+	Configure::write('Database.installed', 'false');

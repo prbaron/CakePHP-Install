@@ -1,51 +1,65 @@
-<?php 
+<?php
+/**
+ *
+ * Model for Install plugin
+ *
+ *
+ * @author		Pierre Baron <prbaron22@gmail.com>
+ *
+ * @link		http://www.pierrebaron.fr
+ * @package		app.Plugin.Install.Model
+ * @since		October 2012
+ * @version		1.1
+ */
 class Install extends InstallAppModel {
 	/**
 	 * no database for the Model
+	 *
+	 * @ignore
 	 */
 	var $useTable = false;
 	
+	/**
+	 * Validation rules for Install plugin
+	 *
+	 * @access	public
+	 * @return	void
+	 */
+	public $validate = array(
+		'host' 	=> array(
+			'rule' 		=> 'notEmpty',
+			'message' 	=> "Please, enter a host"
+		),
+		'login' => array(
+			'rule' 		=> 'notEmpty',
+			'message'	=> "Please, enter your login",
+		),
+		'database' => array(
+			'rule'		=> 'notEmpty',
+			'message'	=> "Please, enter the database name"	
+		)
+	);
 	
 	/**
 	 * Modify security keys in app/Config/core.php
 	 *
 	 * @access	public
-	 * @return	string|boolean	the new salt key if ok, FALSE else.
+	 * @param	string	the key to change
+	 * @param	string	the new value
+	 * @return	string|boolean	the new value if OK, FALSE else.
 	 */
-	public function updateSecurityKeys() {
+	public function changeConfiguration($key, $value, $path = '') {
 		/**
 		 * we modify security key to be unique on each app
 		 */
-		App::uses('File', 'Utility');
-		$file = new File(CONFIG. 'core.php');
-		if (!class_exists('Security')) {
-			require CAKE_CORE_INCLUDE_PATH .DS. 'Cake' .DS. 'Utility' .DS. 'security.php';
-		}
-		$salt = Security::generateAuthKey();
-		$seed = mt_rand() . mt_rand();
-		$contents = $file->read();
-		$contents = preg_replace('/(?<=Configure::write\(\'Security.salt\', \')([^\' ]+)(?=\'\))/', $salt, $contents);
-		$contents = preg_replace('/(?<=Configure::write\(\'Security.cipherSeed\', \')(\d+)(?=\'\))/', $seed, $contents);
+		if($path == '') $path = CONFIG.'core.php';
 		
-		if($file->write($contents)) { return $salt; }
-		else { return false; }		
-	}
-	
-	/**
-	 * Modify the Database.installed variable in Install/Config/bootstrap.php
-	 *
-	 * @access	public
-	 * @return	string|boolean	TRUE if ok, FALSE else
-	 */
-	public function writeInstallationVariable() {
 		App::uses('File', 'Utility');
-		$file = new File(PLUGIN_CONFIG. 'bootstrap.php');
+		$file = new File($path);
 		$contents = $file->read();
-		debug($contents);
-		$contents = preg_replace('/(?<=Configure::write\(\'Database.installed\', )([^\' ]+)(?=\))/', 'true', $contents);
-
-		if($file->write($contents)) { return true; }
+		$contents = preg_replace('/(?<=Configure::write\(\''.$key.'\', \')([^\' ]+)(?=\'\))/', $value, $contents);
+		
+		if($file->write($contents)) { return $value; }
 		else { return false; }		
 	}
-
 }
